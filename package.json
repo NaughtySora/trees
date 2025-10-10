@@ -1,0 +1,34 @@
+{
+  "name": "trees",
+  "author": "NaughtySora <naughtysora@proton.me>",
+  "version": "0.0.1",
+  "license": "MIT",
+  "exports": "./main.js",
+  "types": "main.d.ts",
+  "description": "trees data structure",
+  "keywords": [
+    "nodejs",
+    "tree"
+  ],
+  "readmeFilename": "README.md",
+  "files": [
+    "main.d.ts"
+  ],
+  "scripts": {
+    "test": "c8 node test/index.js",
+    "peek": "node test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NaughtySora/trees.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NaughtySora/trees/issues"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.14",
+    "naughty-util": "^0.5.2",
+    "typescript": "^5.8.2",
+    "c8": "^10.1.3"
+  }
+}
