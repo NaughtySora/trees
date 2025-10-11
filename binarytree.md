@@ -1,0 +1,3 @@
+- in order traversal - sort, bst
+- pre order - copy, build, serialize
+- post order - delete, aggregate, evaluate

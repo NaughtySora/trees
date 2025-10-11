@@ -1,5 +1,7 @@
 'use strict';
 
+const SLL = require("./lib/SLL.js");
+
 class NodeLike {
   #root = null;
 
@@ -9,10 +11,9 @@ class NodeLike {
 
   insert(value) {
     if (this.#root === null) return void (this.#root = this.#node(value));
-    let queue = [this.#root];
-    // making queue with linkedlist to shift with no reindexing
+    const queue = new SLL();
+    let node = this.#root;
     while (true) {
-      const node = queue.shift();
       if (node.left === null) {
         node.left = this.#node(value);
         break;
@@ -21,13 +22,14 @@ class NodeLike {
         node.right = this.#node(value);
         break;
       }
-      queue.push(node.left, node.right);
+      queue.push(node.left);
+      queue.push(node.right);
+      node = queue.shift();
     }
-    queue = null;
   }
 
   bft() { }
-  //sort, bst
+
   in(callback) {
     const stack = [];
     let node = this.#root;
@@ -38,7 +40,7 @@ class NodeLike {
       node = node.right;
     }
   }
-  // copy, build, serialize
+
   pre(callback) {
     const stack = [];
     let node = this.#root;
@@ -48,7 +50,7 @@ class NodeLike {
       node = node.left ?? stack.pop();
     }
   }
-  //delete, aggregate, evaluate
+
   post(callback) {
     const stack = [];
     let node = this.#root;
@@ -76,34 +78,38 @@ class ArrayLike {
   #collection = [];
 }
 
-const structures = { node: NodeLike, array: ArrayLike, };
-
 class BinaryTree {
-  #representation = null;
-  constructor({ structure = "node" } = {}) {
-    const Representation = structures[structure];
-    this.#representation = new (Representation ?? structures.node);
+  #tree = null;
+
+  constructor({ representation = "node" } = {}) {
+    this.#tree = new (BinaryTree.#variants[representation] ?? NodeLike);
   }
 
   insert(value) {
-    this.#representation.insert(value);
+    this.#tree.insert(value);
   }
 
   debug() {
-    this.#representation.debug();
+    this.#tree.debug();
   }
 
   pre(callback) {
-    this.#representation.pre(callback);
+    this.#tree.pre(callback);
   }
 
   in(callback) {
-    this.#representation.in(callback);
+    this.#tree.in(callback);
   }
 
   post(callback) {
-    this.#representation.post(callback);
+    this.#tree.post(callback);
   }
+
+  static #variants = {
+    __proto__: null,
+    node: NodeLike,
+    array: ArrayLike,
+  };
 }
 
 module.exports = BinaryTree;
