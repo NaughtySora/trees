@@ -28,7 +28,16 @@ class NodeLike {
 
   bft() { }
   //sort, bst
-  #in() { }
+  #in(callback) {
+    const stack = [];
+    let node = this.#root;
+    while (stack.length > 0 || node !== null) {
+      while (node !== null) (stack.push(node), node = node.left);
+      node = stack.pop();
+      callback(node.value);
+      node = node.right;
+    }
+  }
   // copy, build, serialize
   #pre(callback) {
     const stack = [];
@@ -41,12 +50,12 @@ class NodeLike {
   }
   //delete, aggregate, evaluate
   #post() { }
-  //     1
-  //    / \
-  //   2   3
-  //  / \
-  // 4   5
+
   dft(method, callback) {
+    if (typeof callback !== "function") {
+      throw new Error('dft requires a callback');
+    }
+    if (!Object.hasOwn(this.#traversal, method)) return;
     this.#traversal[method].call(this, callback);
   }
 
@@ -86,27 +95,3 @@ class BinaryTree {
 
 
 const tree = new BinaryTree();
-
-// tree.insert(1);
-// tree.debug();
-// tree.insert(2);
-// tree.debug();
-// tree.insert(3);
-// tree.debug();
-// tree.insert(4);
-// tree.debug();
-// tree.insert(5);
-// tree.debug();
-// tree.insert(6);
-// tree.debug();
-// tree.insert(7);
-// tree.debug();
-// tree.insert(8);
-// tree.debug();
-
-tree.insert(1);
-tree.insert(2);
-tree.insert(3);
-tree.insert(4);
-tree.insert(5);
-tree.dft('pre', console.log);
