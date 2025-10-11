@@ -28,7 +28,7 @@ class NodeLike {
 
   bft() { }
   //sort, bst
-  #in(callback) {
+  in(callback) {
     const stack = [];
     let node = this.#root;
     while (stack.length > 0 || node !== null) {
@@ -39,7 +39,7 @@ class NodeLike {
     }
   }
   // copy, build, serialize
-  #pre(callback) {
+  pre(callback) {
     const stack = [];
     let node = this.#root;
     while (node) {
@@ -49,21 +49,26 @@ class NodeLike {
     }
   }
   //delete, aggregate, evaluate
-  #post() { }
-
-  dft(method, callback) {
-    if (typeof callback !== "function") {
-      throw new Error('dft requires a callback');
+  post(callback) {
+    const stack = [];
+    let node = this.#root;
+    let visited = null;
+    while (stack.length > 0 || node !== null) {
+      while (node !== null) (stack.push(node), node = node.left);
+      const { left, right, value } = stack[stack.length - 1];
+      if ((left === null && right === null) || visited === right) {
+        callback(value);
+        visited = stack.pop();
+        continue;
+      }
+      if (visited !== left) node = left;
+      if (visited !== right) node = right;
     }
-    if (!Object.hasOwn(this.#traversal, method)) return;
-    this.#traversal[method].call(this, callback);
   }
 
   debug() {
     console.log(this.#root);
   }
-
-  #traversal = { pre: this.#pre, in: this.#in, post: this.#post };
 }
 
 class ArrayLike {
@@ -88,10 +93,17 @@ class BinaryTree {
     this.#representation.debug();
   }
 
-  dft(method, callback) {
-    this.#representation.dft(method, callback);
+  pre(callback) {
+    this.#representation.pre(callback);
+  }
+
+  in(callback) {
+    this.#representation.in(callback);
+  }
+
+  post(callback) {
+    this.#representation.post(callback);
   }
 }
 
-
-const tree = new BinaryTree();
+module.exports = BinaryTree;
