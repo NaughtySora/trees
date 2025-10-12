@@ -32,7 +32,8 @@
 * [perfect] - all internal nodes have 2 children and all leaves at same level
 * every level should be filled 'perfectly'
 * 
-* balanced - height difference <= 1 for every node
+* [balanced]- height difference <= 1 for every node, 
+* keep rearrange nodes to maintain minimum height when remove/inserting nodes
 * 
 * search (bst) - left < node < right ?
 * threaded - empty child pointers replaced by traversal links

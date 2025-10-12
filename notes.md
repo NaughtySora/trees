@@ -43,3 +43,31 @@
 - B-Trees: databases, file systems.
 - Segment Trees: range queries (competitive programming, analytics).
 - Merkle Trees: cryptographic proofs.
+
+
+Binary / BST-based named trees
+AVL Tree – strict balance using heights
+Red-Black Tree – balance with colors, flexible
+Splay Tree – move accessed nodes to root
+Treap – BST + heap property
+Scapegoat Tree – rebuilds unbalanced subtrees
+Weight-Balanced Tree – balance based on subtree sizes
+AA Tree – simplified Red-Black variant
+Bonsai Tree – memory-efficient, compact
+Finger Tree – fast access near ends
+Multiway / disk-oriented trees
+B-Tree – multiway balanced search tree
+B+ Tree – all values at leaves, fast range queries
+B Tree* – variation of B+ tree, better node utilization
+Heap / priority trees
+Binary Heap (Min / Max) – array-based CBT
+Fibonacci Heap – fast amortized operations
+Pairing Heap – simpler heap variant
+Binomial Heap – supports merge efficiently
+Special-purpose trees
+Segment Tree – range queries
+Interval Tree – intervals and overlaps
+Suffix Tree / Suffix Trie – substring search
+Trie / Prefix Tree – string prefix storage
+KD-Tree – multidimensional points, nearest neighbor
+Octree / Quadtree – spatial partitioning (3D / 2D)
