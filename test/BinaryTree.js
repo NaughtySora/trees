@@ -182,31 +182,31 @@ describe("BinaryTree", () => {
       });
     });
 
-    // describe("post-order traversal", () => {
-    //   it('filling', () => {
-    //     const tree = new BinaryTree({ representation: "array" });
-    //     const values = [8, 4, 12, 2, 6, 10, 14];
-    //     values.forEach(v => tree.insert(v));
-    //     const result = [];
-    //     tree.post(v => result.push(v));
-    //     assert.deepEqual(result, [2, 6, 4, 10, 14, 12, 8]);
-    //   });
+    describe("post-order traversal", () => {
+      it('filling', () => {
+        const tree = new BinaryTree({ representation: "array" });
+        const values = [1, 2, 3, 4, 5, 6, 7];
+        values.forEach(v => tree.insert(v));
+        const result = [];
+        tree.post(v => result.push(v));
+        assert.deepEqual(result, [4, 5, 2, 6, 7, 3, 1]);
+      });
 
-    //   it('one', () => {
-    //     const tree = new BinaryTree({ representation: "array" });
-    //     tree.insert(42);
-    //     const result = [];
-    //     tree.post(v => result.push(v));
-    //     assert.deepEqual(result, [42]);
-    //   });
+      it('one', () => {
+        const tree = new BinaryTree({ representation: "array" });
+        tree.insert(42);
+        const result = [];
+        tree.post(v => result.push(v));
+        assert.deepEqual(result, [42]);
+      });
 
-    //   it('empty', () => {
-    //     const tree = new BinaryTree({ representation: "array" });
-    //     const result = [];
-    //     tree.post(v => result.push(v));
-    //     assert.deepEqual(result, []);
-    //   });
-    // });
+      it('empty', () => {
+        const tree = new BinaryTree({ representation: "array" });
+        const result = [];
+        tree.post(v => result.push(v));
+        assert.deepEqual(result, []);
+      });
+    });
 
     describe("bft", () => {
       it('filling', () => {

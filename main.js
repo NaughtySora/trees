@@ -86,7 +86,6 @@ class NodeLike {
   }
 }
 
-//! 2i + 1, 2i+2, (i - 1) / 2
 class ArrayLike {
   #collection = [];
 
@@ -143,7 +142,24 @@ class ArrayLike {
   }
 
   post(callback) {
-
+    let root = 0;
+    const stack = [];
+    const tree = this.#collection;
+    const size = tree.length - 1;
+    let visited = root;
+    while (stack.length > 0 || misc.inRange(root, 0, size)) {
+      while (root <= size) (stack.push(root), root = this.#left(root));
+      const last = stack[stack.length - 1];
+      const right = this.#right(last);
+      const left = this.#left(last);
+      if ((right > size && left > size) || visited === right) {
+        callback(tree[last]);
+        visited = stack.pop();
+        continue;
+      }
+      if (left !== visited) root = left;
+      if (right !== visited) root = right;
+    }
   }
 
   debug() {
