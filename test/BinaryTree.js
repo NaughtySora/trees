@@ -130,35 +130,35 @@ describe("BinaryTree", () => {
       assert.deepEqual(pre, values);
     });
 
-    // describe("pre-order traversal", () => {
-    //   it('filling', () => {
-    //     const tree = new BinaryTree();
-    //     const values = [10, 5, 15, 3, 7, 12, 18];
-    //     values.forEach(v => tree.insert(v));
-    //     const result = [];
-    //     tree.pre(v => result.push(v));
-    //     assert.deepEqual(result, [10, 5, 3, 7, 15, 12, 18]);
-    //   });
-
-    //   it('one', () => {
-    //     const tree = new BinaryTree();
-    //     tree.insert(42);
-    //     const result = [];
-    //     tree.pre(v => result.push(v));
-    //     assert.deepEqual(result, [42]);
-    //   });
-
-    //   it('empty', () => {
-    //     const tree = new BinaryTree();
-    //     const result = [];
-    //     tree.pre(v => result.push(v));
-    //     assert.deepEqual(result, []);
-    //   });
-    // });
-
-    describe.only("in-order traversal", () => {
+    describe("pre-order traversal", () => {
       it('filling', () => {
-        const tree = new BinaryTree();
+        const tree = new BinaryTree({ representation: "array" });
+        const values = [1, 2, 3, 4, 5, 6, 7];
+        values.forEach(v => tree.insert(v));
+        const result = [];
+        tree.pre(v => result.push(v));
+        assert.deepEqual(result, [1, 2, 4, 5, 3, 6, 7]);
+      });
+
+      it('one', () => {
+        const tree = new BinaryTree({ representation: "array" });
+        tree.insert(42);
+        const result = [];
+        tree.pre(v => result.push(v));
+        assert.deepEqual(result, [42]);
+      });
+
+      it('empty', () => {
+        const tree = new BinaryTree({ representation: "array" });
+        const result = [];
+        tree.pre(v => result.push(v));
+        assert.deepEqual(result, []);
+      });
+    });
+
+    describe("in-order traversal", () => {
+      it('filling', () => {
+        const tree = new BinaryTree({ representation: "array" });
         const values = [1, 2, 3, 4, 5, 6, 7];
         values.forEach(v => tree.insert(v));
         const result = [];
@@ -167,7 +167,7 @@ describe("BinaryTree", () => {
       });
 
       it('one', () => {
-        const tree = new BinaryTree();
+        const tree = new BinaryTree({ representation: "array" });
         tree.insert(42);
         const result = [];
         tree.in(v => result.push(v));
@@ -175,7 +175,7 @@ describe("BinaryTree", () => {
       });
 
       it('empty', () => {
-        const tree = new BinaryTree();
+        const tree = new BinaryTree({ representation: "array" });
         const result = [];
         tree.in(v => result.push(v));
         assert.deepEqual(result, []);
@@ -184,7 +184,7 @@ describe("BinaryTree", () => {
 
     // describe("post-order traversal", () => {
     //   it('filling', () => {
-    //     const tree = new BinaryTree();
+    //     const tree = new BinaryTree({ representation: "array" });
     //     const values = [8, 4, 12, 2, 6, 10, 14];
     //     values.forEach(v => tree.insert(v));
     //     const result = [];
@@ -193,7 +193,7 @@ describe("BinaryTree", () => {
     //   });
 
     //   it('one', () => {
-    //     const tree = new BinaryTree();
+    //     const tree = new BinaryTree({ representation: "array" });
     //     tree.insert(42);
     //     const result = [];
     //     tree.post(v => result.push(v));
@@ -201,7 +201,7 @@ describe("BinaryTree", () => {
     //   });
 
     //   it('empty', () => {
-    //     const tree = new BinaryTree();
+    //     const tree = new BinaryTree({ representation: "array" });
     //     const result = [];
     //     tree.post(v => result.push(v));
     //     assert.deepEqual(result, []);

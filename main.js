@@ -1,5 +1,6 @@
 'use strict';
 
+const { misc } = require("naughty-util");
 const SLL = require("./lib/SLL.js");
 
 //! traversal methods are the same, insert methods are different, make insert methods pluggable
@@ -112,7 +113,7 @@ class ArrayLike {
     const stack = [root];
     const tree = this.#collection;
     const size = tree.length - 1;
-    while (stack.length > 0 && (root >= 0 && root <= size)) {
+    while (stack.length > 0 && misc.inRange(root, 0, size)) {
       const left = this.#left(root);
       if (left < size) {
         stack.push(root = left);
@@ -128,7 +129,17 @@ class ArrayLike {
   }
 
   pre(callback) {
-
+    let root = 0;
+    const stack = [root];
+    const tree = this.#collection;
+    const size = tree.length - 1;
+    while (stack.length > 0 && misc.inRange(root, 0, size)) {
+      callback(tree[root]);
+      const right = this.#right(root);
+      if (right <= size) stack.push(right);
+      const left = this.#left(root);
+      root = left <= size ? left : stack.pop();
+    }
   }
 
   post(callback) {
