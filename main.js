@@ -2,6 +2,9 @@
 
 const SLL = require("./lib/SLL.js");
 
+//! traversal methods are the same, insert methods are different, make insert methods pluggable
+//! change traversal method to support inner and outer usage
+
 class NodeLike {
   #root = null;
 
@@ -82,7 +85,7 @@ class NodeLike {
   }
 }
 
-// 2i + 1, 2i+2, (i - 1) / 2
+//! 2i + 1, 2i+2, (i - 1) / 2
 class ArrayLike {
   #collection = [];
 
@@ -96,8 +99,32 @@ class ArrayLike {
     }
   }
 
-  in(callback) {
+  #left(index) {
+    return (2 * index) + 1;
+  }
 
+  #right(index) {
+    return (2 * index) + 2;
+  }
+
+  in(callback) {
+    let root = 0;
+    const stack = [root];
+    const tree = this.#collection;
+    const size = tree.length - 1;
+    while (stack.length > 0 && (root >= 0 && root <= size)) {
+      const left = this.#left(root);
+      if (left < size) {
+        stack.push(root = left);
+        continue;
+      }
+      const index = stack.pop();
+      callback(tree[index]);
+      const right = this.#right(index);
+      if (right > size) continue;
+      stack.push(right);
+      root = right;
+    }
   }
 
   pre(callback) {
