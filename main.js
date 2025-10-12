@@ -3,8 +3,41 @@
 const { misc } = require("naughty-util");
 const SLL = require("./lib/SLL.js");
 
+const KINDS = {
+  __proto__: null,
+  complete: Symbol("kComplete"),
+};
+
 //! traversal methods are the same, insert methods are different, make insert methods pluggable
 //! change traversal method to support inner and outer usage
+
+/**
+ * ! Methods
+ * 
+ * height() -> number of edges on the longest path
+ * size() total nodes
+ * isEmpty()
+ * remove
+ * search
+ * isBalanced
+ * clone
+ * toArray
+ */
+
+/**
+ * ! Binary trees
+ * 
+ * full  - every node has 0 or 2 children 
+ * complete - all level gilled expect last 
+ * perfect - all internal nodes have 2 children and all leaves at same level
+ * balanced - height difference <= 1 for every node
+ * search (bst) - left < node < right ?
+ * threaded - empty child pointers replaced by traversal links
+ * expression/syntax - internal nodes = operators, leaves = operands
+ * decision tree - nodes = tests/conditions, leaves decisions 
+ * heap - complete + comparator
+ * huffman - weight-based
+ */
 
 class NodeLike {
   #root = null;
@@ -13,7 +46,7 @@ class NodeLike {
     return { value, left: null, right: null };
   }
 
-  insert(value) {
+  [KINDS.complete](value) {
     if (this.#root === null) return void (this.#root = this.#node(value));
     const queue = new SLL();
     let node = this.#root;
@@ -89,7 +122,7 @@ class NodeLike {
 class ArrayLike {
   #collection = [];
 
-  insert(value) {
+  [KINDS.complete](value) {
     this.#collection.push(value);
   }
 
@@ -169,13 +202,15 @@ class ArrayLike {
 
 class BinaryTree {
   #tree = null;
+  #kind = KINDS.complete;
 
-  constructor({ representation = "node" } = {}) {
+  constructor({ representation = "node", kind = "complete" } = {}) {
     this.#tree = new (BinaryTree.#variants[representation] ?? NodeLike);
+    this.#kind = KINDS[kind] ?? KINDS.complete;
   }
 
   insert(value) {
-    this.#tree.insert(value);
+    this.#tree[this.#kind](value);
   }
 
   debug() {
