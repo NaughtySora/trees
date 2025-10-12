@@ -28,7 +28,16 @@ class NodeLike {
     }
   }
 
-  bft() { }
+  bft(callback) {
+    const queue = [];
+    let node = this.#root;
+    while (node) {
+      callback(node.value);
+      if (node.left !== null) queue.push(node.left);
+      if (node.right !== null) queue.push(node.right);
+      node = queue.shift();
+    }
+  }
 
   in(callback) {
     const stack = [];
@@ -73,9 +82,35 @@ class NodeLike {
   }
 }
 
+// 2i + 1, 2i+2, (i - 1) / 2
 class ArrayLike {
-  // 2i + 1, 2i+2, (i - 1) / 2
   #collection = [];
+
+  insert(value) {
+    this.#collection.push(value);
+  }
+
+  bft(callback) {
+    for (const node of this.#collection) {
+      callback(node);
+    }
+  }
+
+  in(callback) {
+
+  }
+
+  pre(callback) {
+
+  }
+
+  post(callback) {
+
+  }
+
+  debug() {
+    console.log(this.#collection);
+  }
 }
 
 class BinaryTree {
@@ -103,6 +138,10 @@ class BinaryTree {
 
   post(callback) {
     this.#tree.post(callback);
+  }
+
+  bft(callback) {
+    this.#tree.bft(callback);
   }
 
   static #variants = {
