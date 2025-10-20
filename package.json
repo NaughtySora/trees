@@ -16,7 +16,8 @@
   ],
   "scripts": {
     "test": "c8 node test/index.js",
-    "peek": "node test/index.js"
+    "peek": "node test/index.js",
+    "benchmark": "node --nouse-idle-notification --expose-gc benchmark.js"
   },
   "repository": {
     "type": "git",
