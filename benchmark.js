@@ -18,7 +18,7 @@ function* range(arr, from, to = from) {
   while (from <= to) yield arr[from++];
 }
 
-const arr = Array.from({ length: 500 }, () => misc.random(10000, -10000));
+const arr = Array.from({ length: 50000 }, () => misc.random(10000, -10000));
 const min = Math.floor(arr.length / 2);
 const max = arr.length - 1;
 

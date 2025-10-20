@@ -1,6 +1,6 @@
 'use strict';
 
-const { describe, it } = require("node:test");
+const { describe, it, beforeEach } = require("node:test");
 const assert = require('node:assert/strict');
 const SegmentTree = require("../lib/SegmentTree.js");
 
@@ -25,15 +25,54 @@ describe('SegmentTree', () => {
     assert.deepEqual(tree.meta(25), 13);
   });
 
-  it('computes correct max over full range', () => {
+  it('max over full range', () => {
     const tree = new SegmentTree(arr, max);
     assert.equal(tree.select(0, arr.length - 1), 19);
     assert.equal(tree.select(1, 3), 3);
   });
 
-  it('computes correct sum over partial range', () => {
+  it('sum over partial range', () => {
     const tree = new SegmentTree(arr, sum);
     assert.equal(tree.select(0, arr.length - 1), 190);
     assert.equal(tree.select(1, 3), 6);
+  });
+
+  describe('update', () => {
+    let tree;
+
+    beforeEach(() => {
+      tree = new SegmentTree(
+        [1, 3, 5, 7, 9, 11, 13, 15],
+        arr => arr.reduce((a, b) => a + b, 0)
+      );
+    });
+
+    it('updates a single leaf and propagates aggregation', () => {
+      assert.equal(tree.select(0, 7), 64);
+      assert.equal(tree.select(0, 1), 4);
+      assert.equal(tree.select(3, 3), 7);
+      tree.update(3, 10);
+      assert.equal(tree.select(3, 3), 10);
+      assert.equal(tree.select(0, 7), 67);
+      assert.equal(tree.select(0, 3), 19);
+      assert.equal(tree.select(3, 5), 30);
+    });
+
+    it('updates first and last elements', () => {
+      tree.update(0, 100);
+      tree.update(7, 200);
+      assert.equal(tree.select(0, 0), 100);
+      assert.equal(tree.select(7, 7), 200);
+      assert.equal(tree.select(0, 7), 348);
+    });
+
+    it('updates multiple elements sequentially', () => {
+      tree.update(2, 0);
+      tree.update(4, 0);
+      tree.update(5, 20);
+      assert.equal(tree.select(0, 2), 4);
+      assert.equal(tree.select(3, 5), 27);
+      assert.equal(tree.select(0, 7), 59);
+    });
   });
 });
