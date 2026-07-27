@@ -2,7 +2,7 @@
 
 const { describe, it } = require("node:test");
 const assert = require("node:assert/strict");
-const BinaryTree = require("../lib/BinaryTree.js");
+const BinaryTree = require("../lib/BinaryTree/index.js");
 
 describe("BinaryTree", () => {
   describe("NodeLike", () => {

@@ -2,7 +2,7 @@
 
 const { describe } = require("node:test");
 const assert = require("node:assert/strict");
-const SLL = require("../lib/SLL.js");
+const SLL = require("../lib/internal/SLL.js");
 
 describe("SLL", () => {
   const list = new SLL();

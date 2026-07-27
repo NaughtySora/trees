@@ -1,8 +1,8 @@
 'use strict';
 
 const { describe, it, beforeEach } = require("node:test");
-const BinaryHeap = require("../lib/BinaryHeap.js");
 const assert = require("node:assert/strict");
+const BinaryHeap = require("../lib/BinaryHeap/index.js");
 
 describe('BinaryHeap', () => {
   it('compare should be function', () => {

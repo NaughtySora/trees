@@ -2,7 +2,7 @@
 
 const { describe, it, beforeEach } = require("node:test");
 const assert = require('node:assert/strict');
-const SegmentTree = require("../lib/SegmentTree.js");
+const SegmentTree = require("../lib/SegmentTree/index.js");
 
 describe('SegmentTree', () => {
   const arr = Array.from({ length: 20 }, (_, i) => i);
