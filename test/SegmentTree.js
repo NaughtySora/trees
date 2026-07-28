@@ -4,10 +4,11 @@ const { describe, it, beforeEach } = require("node:test");
 const assert = require('node:assert/strict');
 const SegmentTree = require("../lib/SegmentTree/index.js");
 
+const max = (values) => Math.max(...values);
+const sum = (values) => values.reduce((a, b) => a + b, 0);
+
 describe('SegmentTree', () => {
   const arr = Array.from({ length: 20 }, (_, i) => i);
-  const max = (values) => Math.max(...values);
-  const sum = (values) => values.reduce((a, b) => a + b, 0);
 
   it('tree building correctly', () => {
     const tree = new SegmentTree(arr, max);
@@ -38,16 +39,10 @@ describe('SegmentTree', () => {
   });
 
   describe('update', () => {
-    let tree;
+    const data = [1, 3, 5, 7, 9, 11, 13, 15];
 
-    beforeEach(() => {
-      tree = new SegmentTree(
-        [1, 3, 5, 7, 9, 11, 13, 15],
-        arr => arr.reduce((a, b) => a + b, 0)
-      );
-    });
-
-    it('updates a single leaf and propagates aggregation', () => {
+    it('update single leaf', () => {
+      const tree = new SegmentTree(data, sum);
       assert.equal(tree.select(0, 7), 64);
       assert.equal(tree.select(0, 1), 4);
       assert.equal(tree.select(3, 3), 7);
@@ -58,7 +53,7 @@ describe('SegmentTree', () => {
       assert.equal(tree.select(3, 5), 30);
     });
 
-    it('updates first and last elements', () => {
+    it('update first and last', () => {
       tree.update(0, 100);
       tree.update(7, 200);
       assert.equal(tree.select(0, 0), 100);
@@ -66,7 +61,7 @@ describe('SegmentTree', () => {
       assert.equal(tree.select(0, 7), 348);
     });
 
-    it('updates multiple elements sequentially', () => {
+    it('update multiple elements', () => {
       tree.update(2, 0);
       tree.update(4, 0);
       tree.update(5, 20);

@@ -10,7 +10,9 @@ Root is a whole array, each parent halfs the range.
 - nodes - an aggregation information of their children.
 
 ### Example
-1, 3, 5, 7, 9, 11
+items: 1, 3, 5, 7, 9, 11
+fn: sum
+each parent node is sum of the items
 ```
        [1, 3, 5, 7, 9, 11]
            /        \
