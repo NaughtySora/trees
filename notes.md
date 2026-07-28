@@ -10,7 +10,7 @@ Connected acyclic graph with one node as a root
 - Subtree: node and its all descendants
 - Children: closest descendants connected to node
 
-## traversal order
+## Traversal order
 #### Depth-First Search (DFS)
 DFS uses explicit stack or recursion.
 1. PRE
@@ -62,6 +62,70 @@ BFS uses a queue.
 order: A, B, C, D, E
 used: Levels, shortest path in unweighted tree, printing by levels
 
+#### Rebalancing
+The process of restructuring a tree with specific rules.
+for example:
+binary search tree (BST) has to keep its height as small as possible
+
+#### Filling order
+1. BFS
+left to right, level by level.
+```
+    1
+   / \
+  2   3
+ / \
+4   5
+```
+2. BST
+Every insertion starts at the root.
+Compare value, if v > node go right, else go left till find free spot
+```
+      5
+     / \
+    2   8
+   / \
+  1   3
+```
+insert: 4
+4 > 5 = left
+4 > 2 = right
+4 > 3 = right
+```
+      5
+     / \
+    2   8
+   / \
+  1   3
+       \
+        4
+```
+3. Path-based filling
+Define rules that determines the child.
+```
+cat
+root
+ |
+ c
+ |
+ a
+ |
+ t
+```
+4. Arbitrary linking
+A generic binary tree has no insertion algorithm.
+It has only rule: Every node may have a left child and a right child.
+So its up to you.
+For example: (2 + 3) * 5
+Expression says where to put the nodes
+```
+      *
+     / \
+    +   5
+   / \
+  2   3
+```
+
 #### Specialized Trees
 - Segment Tree: range queries (min, max, sum over intervals).
 - Fenwick Tree (BIT): efficient prefix sums.
@@ -81,34 +145,34 @@ used: Levels, shortest path in unweighted tree, printing by levels
 - Merkle Trees: cryptographic proofs.
 
 #### list (unordered)
-Binary Search Trees (BST)
-Binary / BST-based named trees
-AVL Tree - strict balance using heights
-Red-Black Tree - balance with colors, flexible
-Splay Tree - move accessed nodes to root
-Treap - BST + heap property
-Scapegoat Tree - rebuilds unbalanced subtrees
-Weight-Balanced Tree - balance based on subtree sizes
-AA Tree - simplified Red-Black variant
-Bonsai Tree - memory-efficient, compact
-Finger Tree - fast access near ends
-Multiway / disk-oriented trees
-B-Tree - multiway balanced search tree
-B+ Tree - all values at leaves, fast range queries
-B Tree* - variation of B+ tree, better node utilization
-Heap / priority trees
-Binary Heap (Min / Max) - array-based CBT
-Fibonacci Heap - fast amortized operations
-Pairing Heap - simpler heap variant
-Binomial Heap - supports merge efficiently
-Special-purpose trees
-Segment Tree - range queries
-Interval Tree - intervals and overlaps
-Suffix Tree / Suffix Trie - substring search
-Trie / Prefix Tree - string prefix storage
-KD-Tree - multidimensional points, nearest neighbor
-Octree / Quadtree - spatial partitioning (3D / 2D)
-threaded - empty child pointers replaced by traversal links
-expression/syntax - internal nodes = operators, leaves = operands
-decision tree - nodes = tests/conditions, leaves decisions 
-huffman - weight-based
+- Binary Search Trees (BST)
+- Binary / BST-based named trees
+- AVL Tree - strict balance using heights
+- Red-Black Tree - balance with colors, flexible
+- Splay Tree - move accessed nodes to root
+- Treap - BST + heap property
+- Scapegoat Tree - rebuilds unbalanced subtrees
+- Weight-Balanced Tree - balance based on subtree sizes
+- AA Tree - simplified Red-Black variant
+- Bonsai Tree - memory-efficient, compact
+- Finger Tree - fast access near ends
+- Multiway / disk-oriented trees
+- B-Tree - multiway balanced search tree
+- B+ Tree - all values at leaves, fast range queries
+- B Tree* - variation of B+ tree, better node utilization
+- Heap / priority trees
+- Binary Heap (Min / Max) - array-based CBT
+- Fibonacci Heap - fast amortized operations
+- Pairing Heap - simpler heap variant
+- Binomial Heap - supports merge efficiently
+- Special-purpose trees
+- Segment Tree - range queries
+- Interval Tree - intervals and overlaps
+- Suffix Tree / Suffix Trie - substring search
+- Trie / Prefix Tree - string prefix storage
+- KD-Tree - multidimensional points, nearest neighbor
+- Octree / Quadtree - spatial partitioning (3D / 2D)
+- threaded - empty child pointers replaced by traversal links
+- expression/syntax - internal nodes = operators, leaves = operands
+- decision tree - nodes = tests/conditions, leaves decisions 
+- huffman - weight-based
