@@ -22,7 +22,7 @@ const search = Array.from({ length: 1000 }, () => ({
   to: misc.random(max, min),
 }));
 
-const calculateFull = () => {
+const sequential = () => {
   const start = misc.timestamp();
   const result = [];
   for (const params of search) {
@@ -32,7 +32,7 @@ const calculateFull = () => {
   return { result, end };
 };
 
-const calculateTree = () => {
+const tree = () => {
   const tree = new SegmentTree(arr, sum);
   const start = misc.timestamp();
   const result = [];
@@ -44,6 +44,6 @@ const calculateTree = () => {
 };
 
 console.log({
-  tree: calculateTree().end.seconds,
-  full: calculateFull().end.seconds,
+  tree: tree().end.seconds,
+  sequential: sequential().end.seconds,
 });
