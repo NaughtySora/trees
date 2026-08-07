@@ -144,7 +144,7 @@ Expression says where to put the nodes
 - Segment Trees: range queries (competitive programming, analytics).
 - Merkle Trees: cryptographic proofs.
 
-#### list (unordered)
+#### list (unsorted / unordered / unfiltered)
 - Binary Search Trees (BST)
 - Binary / BST-based named trees
 - AVL Tree - strict balance using heights
