@@ -54,6 +54,7 @@ describe('SegmentTree', () => {
     });
 
     it('update first and last', () => {
+      const tree = new SegmentTree(data, sum);
       tree.update(0, 100);
       tree.update(7, 200);
       assert.equal(tree.select(0, 0), 100);
@@ -62,6 +63,7 @@ describe('SegmentTree', () => {
     });
 
     it('update multiple elements', () => {
+      const tree = new SegmentTree(data, sum);
       tree.update(2, 0);
       tree.update(4, 0);
       tree.update(5, 20);
