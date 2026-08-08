@@ -180,3 +180,81 @@ which can cause ancestors farther up to become unbalanced too.
 There are 2 ways to maintain parent while inserting/deleting
 1. Keep parent in child node
 2. Keep parent on the stack/recursion call
+
+#### Rebalancing
+Change the shape of the subtree so that it becomes balanced, 
+while preserving the BST ordering.
+
+##### example
+- detect violation |left.height - right.height| > 1
+- detect which side is heavy 
+left.height > right.height, otherwise its right
+- take node and detect its heavy side
+- now we have 4 cases to rotate.
+1. LL (Left-left heavy)
+A is too heavy on the left:
+left = 2
+right = 0
+balance = 2 > 1
+```
+              A               B
+             / \             / \
+            B   Y    ->     X   A
+           / \             /   / \
+          X   C           D   C   Y
+         /
+        D
+```
+- A becomes B.right.
+- C moves from B.right to A.left because B < C < A.
+2. LR (Left-right heavy)
+A is too heavy on the left-right:
+left = 2
+right = 0
+balance = 2 > 1
+```
+          A                        C
+         / \                     /   \
+        B   Y                   B     A
+       / \          ->         / \   / \
+      X   C                   X   D E   Y
+         / \
+        D   E
+```
+- C moves up above B.
+- D moves B.right because B < D < C.
+- A moves to C.right.
+- E moves to A.left because C < E < A.
+3. RL (Right-left heavy)
+A is too heavy on the right-left:
+left = 0
+right = 2
+balance = 2 > 1
+```
+          A                               C
+         / \                             / \
+        X   B                           A   B
+           / \           ->            / \ / \
+          C   Y                       X  D E  Y
+         / \
+        D   E
+```
+- C moves up above B.
+- E moves to B.left because C < E < B.
+- D moves to A.right because A < D < C.
+4. RR (Right-right heavy)
+A is too heavy on the right:
+left = 0
+right = 2
+balance = 2 > 1
+```
+      A                           B
+     / \                         / \
+    X   B          ->           A   Y
+       / \                     / \   \
+      C   Y                   X   C   D
+           \
+            D
+```
+- A becomes B.left
+- C moves from B.left to A.right because A < C < B
