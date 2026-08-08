@@ -208,23 +208,38 @@ balance = 2 > 1
 - A becomes B.right.
 - C moves from B.right to A.left because B < C < A.
 2. LR (Left-right heavy)
-A is too heavy on the left-right:
-left = 2
-right = 0
-balance = 2 > 1
+The violation is at A.
+It means rotate B to the left and A to the right.
+Rotate the subtree whose root is B so that B right child moves up 
+and B moves down to the left.
 ```
-          A                        C
-         / \                     /   \
-        B   Y                   B     A
-       / \          ->         / \   / \
-      X   C                   X   D E   Y
+          A
+         / \
+        B   Y 
+       / \
+      X   C 
          / \
         D   E
 ```
-- C moves up above B.
-- D moves B.right because B < D < C.
-- A moves to C.right.
-- E moves to A.left because C < E < A.
+- rotate B to the left, make C parent of B, we know that B < D < C
+
+```                         A
+                           / \
+                          C   Y
+                         / \
+                        B   E
+                       / \
+                      X   D
+```
+- We made LL, now rotate A right, make C parent of A with C < E < A
+```
+          C
+         / \
+        B   A
+       / \ / \
+      X  D E  Y
+```
+
 3. RL (Right-left heavy)
 A is too heavy on the right-left:
 left = 0
