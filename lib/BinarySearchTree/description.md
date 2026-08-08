@@ -157,6 +157,9 @@ Every node has balance factor.
 height left - height right.
 valid values: -1 | 0 | 1.
 
+left, no child nodes = 0 height
+empty child = -1 height
+
 #### Heigh-balanced
 Height of the left and right subtrees can be different by at most 1.
 
