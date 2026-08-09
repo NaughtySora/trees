@@ -192,10 +192,6 @@ left.height > right.height, otherwise its right
 - take node and detect its heavy side
 - now we have 4 cases to rotate.
 1. LL (Left-left heavy)
-A is too heavy on the left:
-left = 2
-right = 0
-balance = 2 > 1
 ```
               A               B
              / \             / \
@@ -205,8 +201,8 @@ balance = 2 > 1
          /
         D
 ```
-- A becomes B.right.
-- C moves from B.right to A.left because B < C < A.
+- Rotate A right, make B parent of A
+
 2. LR (Left-right heavy)
 The violation is at A.
 It means rotate B to the left and A to the right.
@@ -221,7 +217,7 @@ and B moves down to the left.
          / \
         D   E
 ```
-- rotate B to the left, make C parent of B, we know that B < D < C
+- rotate B to the left, make C parent of B
 
 ```                         A
                            / \
@@ -231,7 +227,7 @@ and B moves down to the left.
                        / \
                       X   D
 ```
-- We made LL, now rotate A right, make C parent of A with C < E < A
+- We made LL, now rotate A right, make C parent of A
 ```
           C
          / \
@@ -241,27 +237,35 @@ and B moves down to the left.
 ```
 
 3. RL (Right-left heavy)
-A is too heavy on the right-left:
-left = 0
-right = 2
-balance = 2 > 1
 ```
-          A                               C
-         / \                             / \
-        X   B                           A   B
-           / \           ->            / \ / \
-          C   Y                       X  D E  Y
+          A   
+         / \          
+        X   B  
+           / \ 
+          C   Y                      
          / \
         D   E
 ```
-- C moves up above B.
-- E moves to B.left because C < E < B.
-- D moves to A.right because A < D < C.
+Rotate B right, C becomes parent B
+```
+     A
+    / \
+   X   C
+      / \ 
+     D   B
+        / \
+       E   Y
+```
+Rotate A left, C becomes parent of A
+```
+     C
+    / \
+   A   B
+  / \ / \
+ X  D E  Y
+```
+
 4. RR (Right-right heavy)
-A is too heavy on the right:
-left = 0
-right = 2
-balance = 2 > 1
 ```
       A                           B
      / \                         / \
@@ -271,5 +275,4 @@ balance = 2 > 1
            \
             D
 ```
-- A becomes B.left
-- C moves from B.left to A.right because A < C < B
+- Rotate A left, make B parent of A
