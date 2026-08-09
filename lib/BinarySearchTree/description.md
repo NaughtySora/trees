@@ -185,7 +185,7 @@ There are 2 ways to maintain parent while inserting/deleting
 Change the shape of the subtree so that it becomes balanced, 
 while preserving the BST ordering.
 
-##### example
+#### Rotation
 - detect violation |left.height - right.height| > 1
 - detect which side is heavy 
 left.height > right.height, otherwise its right
@@ -204,9 +204,9 @@ left.height > right.height, otherwise its right
 - Rotate A right, make B parent of A
 
 2. LR (Left-right heavy)
-The violation is at A.
-It means rotate B to the left and A to the right.
-Rotate the subtree whose root is B so that B right child moves up 
+The violation is at A.\
+It means rotate B to the left and A to the right.\
+Rotate the subtree whose root is B so that B right child moves up
 and B moves down to the left.
 ```
           A
@@ -219,7 +219,8 @@ and B moves down to the left.
 ```
 - rotate B to the left, make C parent of B
 
-```                         A
+```
+                            A
                            / \
                           C   Y
                          / \
