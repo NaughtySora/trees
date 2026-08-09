@@ -2,7 +2,7 @@
 
 const { describe, it } = require("node:test");
 const assert = require('node:assert/strict');
-const { BinarySearchTree } = require("../lib/BinarySearchTree/plain.js");
+const { BinarySearchTree } = require("../lib/BinarySearchTree/index.js");
 const { misc } = require("naughty-util");
 
 const NUMBERS = [8, 3, 1, 6, 4, 7, 10, 14];
