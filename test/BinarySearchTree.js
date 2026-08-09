@@ -74,6 +74,9 @@ describe('BinarySearchTree', () => {
       test.set(x, [...tree]);
     });
     assert.deepEqual(test, expected);
+    const tree = new BinarySearchTree();
+    NUMBERS.forEach(x => tree.insert(x));
+    assert.ok(!tree.delete(-500));
   });
 });
 
