@@ -13,6 +13,31 @@ When modifications are significant part of the workload.
 #### Concepts
 1. Every node is either red or black.
 2. The root is black.
-3. Every missing child is considered black.
+3. Every missing child (null) is considered black.
 4. A red node cannot have a red child.
-5. Every path from a node down to its a leaf contains the same number of black nodes.
+5. Every path from a node down to its end contains the same number of black nodes.
+
+Black nodes server as structural markers.
+The rules forces every route to have the same amount of black markers.
+Red nodes are allowed to sit between black nodes.
+
+#### Rotation - When parent and child are both red
+1. Look at parent other side (uncle), if its null, rotate
+```
+    10(B)               5(B)
+    / \                 / \
+  5(R) null(B)  ->    1(R) 10(R)
+  /                         \
+1(R)                     null(B)
+```
+
+2. If both parent and uncle are red, doesn't rotate.
+Recolor both of them, and move red color up to grandparent.
+If grandparent is root, skip recoloring.
+```
+     5(B)             5(R)   
+     / \              / \ 
+  1(R) 10(R)        1(B) 10(B) 
+   /                /
+-1(R)            -1(R)
+```
