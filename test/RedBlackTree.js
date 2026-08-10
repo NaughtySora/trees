@@ -7,9 +7,24 @@ const RedBlackTree = require('../lib/BinarySearchTree/RedBlack/index.js');
 const grow = (dataset, tree = new RedBlackTree()) =>
   (dataset.forEach(x => tree.insert(x)), tree);
 
-describe.only('RedBlackTree', () => {
+describe('RedBlackTree', () => {
   it('insert LL', () => {
     const tree = grow([50, 30, 20, 10, 5, 25, 40, 35, 45, 15]);
+    const colors = new Map([
+      [50, RedBlackTree.black],
+      [30, RedBlackTree.black],
+      [20, RedBlackTree.black],
+      [10, RedBlackTree.red],
+      [5, RedBlackTree.black],
+      [25, RedBlackTree.red],
+      [40, RedBlackTree.red],
+      [35, RedBlackTree.black],
+      [45, RedBlackTree.red],
+      [15, RedBlackTree.red],
+    ]);
+    for(const i of tree){
+      assert.equal(tree.search(i).color, colors.get(i));
+    }
     assert.deepEqual([...tree], [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]);
   });
 
