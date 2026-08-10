@@ -22,7 +22,20 @@ The rules forces every route to have the same amount of black markers.
 Red nodes are allowed to sit between black nodes.
 
 #### Rotation - When parent and child are both red
-1. Look at parent other side (uncle), if its null, rotate
+Look at parent other side (uncle), if its black, rotate
+
+1. Check if tree LR or RL, turn it into LL or RR, otherwise skip this step.
+example rotation from LR to LL
+```
+      10(B)           10(B)
+      /   \            /  \
+    1(R)  r1   ->    5(R)  r1
+    / \             / \
+  l2   5(R)      1(R)  r3
+      / \         / \
+    l3  r3      l2   l3 
+```
+2. Turn LL or RR into proper balanced tree 
 ```
     10(B)               5(B)
     / \                 / \
