@@ -34,6 +34,7 @@ Red nodes are allowed to sit between black nodes.
 2. If both parent and uncle are red, doesn't rotate.
 Recolor both of them, and move red color up to grandparent.
 If grandparent is root, skip recoloring.
+Advance rebalancing up to grandparent.
 ```
      5(B)             5(R)   
      / \              / \ 
